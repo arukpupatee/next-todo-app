@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { api } from '@/lib/api/backend';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -34,9 +35,8 @@ export default function Register() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    // TODO: Implement registration logic
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    await api.authentication.register(data);
   };
 
   return (
